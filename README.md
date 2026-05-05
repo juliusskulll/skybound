@@ -1,0 +1,2 @@
+# skybound
+Skybound Wiki
