@@ -389,7 +389,7 @@
         <div class="section-items">
           <button class="page-btn active" data-title="Getting Started">Getting Started</button>
           <button class="page-btn" data-title="Island Rules">Island Rules</button>
-          <button class="page-btn" data-title="Daily Goals">Daily Goals</button>
+          <button class="page-btn" data-title="Keep Inventory Grace Period">Keep Inventory Grace Period</button>
           <button class="page-btn" data-title="Player Progression">Player Progression</button>
         </div>
       </div>
@@ -398,8 +398,9 @@
         <button class="section-btn">The Portal <span class="arrow">⌄</span></button>
         <div class="section-items">
           <button class="page-btn" data-title="Portal Overview">Portal Overview</button>
+          <button class="page-btn" data-title="Portal Keys">Portal Keys</button>
           <button class="page-btn" data-title="Overworld Trips">Overworld Trips</button>
-          <button class="page-btn" data-title="Resource Runs">Resource Runs</button>
+          <button class="page-btn" data-title="Shifting Portal Rules">Shifting Portal Rules</button>
           <button class="page-btn" data-title="Death & Recovery">Death & Recovery</button>
         </div>
       </div>
@@ -421,7 +422,7 @@
           <p class="hero-small">Minecraft SMP Wiki</p>
           <h2>Welcome to Skybound</h2>
           <p>
-            A skyblock-style social experiment server built around survival, trading, loyalty, sabotage, events, and limited trips through the portal.
+            A modified skyblock social experiment SMP built around survival, daily portal keys, shifting overworld access, loyalty, sabotage, events, and unpredictable rewards.
           </p>
         </div>
       </section>
@@ -431,13 +432,14 @@
           <p class="label">Current Page</p>
           <h2 id="page-title">Getting Started</h2>
           <div class="content-text" id="page-content">
-            <p>This is placeholder wiki text for <strong>Getting Started</strong>. Once you send the real information, this section can be replaced with proper rules, instructions, server lore, tips, and examples.</p>
-            <p>Use this page to explain what players need to know clearly, so new members can join without needing everything explained in Discord.</p>
+            <p>Skybound is a modified skyblock SMP where all players begin on an above-average sized starting island. The server is not just about normal survival. It is built around limited resources, daily choices, social experiments, minigames, trust, betrayal, and the mystery of the portal.</p>
+            <p>At the start, keep inventory will be enabled for at least 1 or 2 days. This gives players time to get settled, build a base, gather early resources, and prepare before the server becomes more dangerous.</p>
+            <p>The main goal is to survive, expand the island, trade with other players, complete tasks, take part in events, and use the portal to collect rare resources from other worlds.</p>
           </div>
 
           <div class="note-box">
             <h4>Placeholder Box</h4>
-            <p>Add important notes here, such as server rules, time windows, event rewards, danger warnings, or portal restrictions.</p>
+            <p>The portal is the heart of Skybound. It changes often, may lead to different places, and will not always let players bring items back safely.</p>
           </div>
         </article>
 
@@ -449,11 +451,11 @@
           </div>
           <div class="status-box blue">
             <strong>Portal Access</strong>
-            <span>Not announced yet</span>
+            <span>Changes daily</span>
           </div>
           <div class="status-box yellow">
             <strong>Next Event</strong>
-            <span>To be added</span>
+            <span>Through the portal</span>
           </div>
         </aside>
       </section>
@@ -468,9 +470,72 @@
     const pageButtons = document.querySelectorAll(".page-btn");
     const sectionButtons = document.querySelectorAll(".section-btn");
 
-    const placeholderText = (title) => `
-      <p>This is placeholder wiki text for <strong>${title}</strong>. Once you send the real information, this section can be replaced with proper rules, instructions, server lore, tips, and examples.</p>
-      <p>Use this page to explain what players need to know clearly, so new members can join without needing everything explained in Discord.</p>
+    const pages = {
+      "Getting Started": `
+        <p>Skybound is a modified skyblock SMP where all players begin on an above-average sized starting island. The server is not just about normal survival. It is built around limited resources, daily choices, social experiments, minigames, trust, betrayal, and the mystery of the portal.</p>
+        <p>At the start, keep inventory will be enabled for at least 1 or 2 days. This gives players time to get settled, build a base, gather early resources, and prepare before the server becomes more dangerous.</p>
+        <p>The main goal is to survive, expand the island, trade with other players, complete tasks, take part in events, and use the portal to collect rare resources from other worlds.</p>
+      `,
+      "Island Rules": `
+        <p>The main world is based around a large skyblock island. Players must use the limited space wisely by building farms, bases, storage areas, shops, and community structures.</p>
+        <p>Because resources are limited, trading and teamwork may become important. However, players can also choose to form groups, make alliances, or betray others depending on how the server develops.</p>
+        <p>The island is meant to create tension. Everyone shares the same world, but not everyone will have the same goals.</p>
+      `,
+      "Keep Inventory Grace Period": `
+        <p>For the first 1 or 2 days, keep inventory will be enabled. This is the grace period where players can safely get positioned without losing everything immediately.</p>
+        <p>After the grace period, the server can become harsher. Death may cause permanent loot loss, and certain portal deaths may even lead to temporary bans until other players bring you back.</p>
+      `,
+      "Player Progression": `
+        <p>Progression in Skybound comes from building, surviving, trading, completing tasks, winning events, and successfully using the portal.</p>
+        <p>Players can become known for different roles such as builders, farmers, traders, explorers, fighters, event winners, or leaders of groups.</p>
+        <p>Winners of certain events may be granted wishes, giving them special rewards or influence over the server.</p>
+      `,
+      "Portal Overview": `
+        <p>The portal is the main feature of Skybound. It allows players to leave the skyblock island and enter other worlds or special event areas.</p>
+        <p>Players cannot normally enter places like the Nether. Instead, the portal controls access to these areas. One day it might lead to the overworld, another day it might lead to the Nether, and another day it might lead to a custom event.</p>
+        <p>This makes the portal unpredictable and important. Players must decide when it is worth taking the risk.</p>
+      `,
+      "Portal Keys": `
+        <p>To use the portal, players must craft a Portal Key. The recipe for the Portal Key changes every day, meaning players cannot rely on the same method forever.</p>
+        <p>This encourages daily activity, trading, resource gathering, and cooperation. Some players might have the resources needed for the key, while others may need to trade, team up, or compete for them.</p>
+        <p>Crafting a Portal Key gives players access to the portal for that day, depending on the current portal rules.</p>
+      `,
+      "Overworld Trips": `
+        <p>During specific times, the portal may open to the normal overworld. Players can use this chance to gather resources that are impossible or difficult to get on the skyblock island.</p>
+        <p>However, the same overworld area may not be available twice. Once the portal shifts, that version of the world may be gone forever.</p>
+        <p>Players must be careful, because dying during these trips may cause permanent loot loss or other punishments depending on the current rules.</p>
+      `,
+      "Shifting Portal Rules": `
+        <p>The portal shifts every day. Sometimes players may be allowed to bring items back from the portal world, and sometimes they may not.</p>
+        <p>This means every portal opening can have different rules. Some days may be safe resource runs, while other days may be dangerous challenges, traps, social experiments, or limited-time events.</p>
+        <p>The portal can also lead to special worlds such as the Nether, even though normal Nether entry is disabled.</p>
+      `,
+      "Death & Recovery": `
+        <p>Death in Skybound can become serious after the grace period. Players may lose loot permanently, especially during portal trips.</p>
+        <p>There may also be temporary bans where dead players cannot return until others craft specific items or complete a recovery task to bring them back.</p>
+        <p>This creates pressure, because your survival may depend on whether other players are loyal enough to help you.</p>
+      `,
+      "Social Experiments": `
+        <p>Skybound will include constant social experiments designed to test trust, loyalty, greed, betrayal, teamwork, and leadership.</p>
+        <p>Players may be forced to choose between helping the group, helping themselves, sabotaging others, or making secret deals.</p>
+        <p>The server is meant to create stories naturally through player choices.</p>
+      `,
+      "Mini Games": `
+        <p>Minigames can happen through the portal or on the island. These may include survival challenges, PvP rounds, resource races, trust games, escape challenges, or team competitions.</p>
+        <p>Some minigames may reward winners with rare items, wishes, or special advantages.</p>
+      `,
+      "Wishes & Rewards": `
+        <p>Winners of certain events may be granted wishes. A wish could be a powerful reward, a rare item, a server advantage, or a change that affects the world.</p>
+        <p>Wishes should feel special, but not completely ruin the balance of the server.</p>
+      `,
+      "Season Timeline": `
+        <p>The season begins with a short keep inventory grace period. After that, the portal becomes more important, death becomes riskier, and events can start changing the direction of the server.</p>
+        <p>As the season continues, players will form groups, build up the island, compete in portal events, and create alliances or rivalries.</p>
+      `
+    };
+
+    const placeholderText = (title) => pages[title] || `
+      <p>This page has not been written yet.</p>
     `;
 
     toggleSidebar.addEventListener("click", () => {
