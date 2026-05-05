@@ -271,24 +271,50 @@
     .content-text p {
       margin-bottom: 14px;
     }
-
-    .note-box {
+    .image-row {
       margin-top: 24px;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .wiki-image-card {
+      min-height: 150px;
       border-radius: 20px;
       padding: 18px;
+      background: linear-gradient(180deg, #f0f9ff, #ffffff);
+      border: 1px solid #bae6fd;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
 
-    .note-box h4 {
+    .wiki-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    .wiki-image-card strong {
       color: #075985;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      font-size: 15px;
     }
 
-    .note-box p {
-      color: #475569;
-      font-size: 14px;
-      line-height: 1.6;
+    .wiki-image-card span {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .status-card h3 {
@@ -437,9 +463,22 @@
             <p>The main goal is to survive, expand the island, trade with other players, complete tasks, take part in events, and use the portal to collect rare resources from other worlds.</p>
           </div>
 
-          <div class="note-box">
-            <h4>Placeholder Box</h4>
-            <p>The portal is the heart of Skybound. It changes often, may lead to different places, and will not always let players bring items back safely.</p>
+          <div class="image-row" id="image-row">
+            <div class="wiki-image-card">
+              <div class="wiki-icon">☁️</div>
+              <strong>Sky Island</strong>
+              <span>Your main home in the sky.</span>
+            </div>
+            <div class="wiki-image-card">
+              <div class="wiki-icon">🗝️</div>
+              <strong>Portal Key</strong>
+              <span>Crafted with a daily recipe.</span>
+            </div>
+            <div class="wiki-image-card">
+              <div class="wiki-icon">🌀</div>
+              <strong>Shifting Portal</strong>
+              <span>Changes destination and rules.</span>
+            </div>
           </div>
         </article>
 
@@ -467,8 +506,77 @@
     const toggleSidebar = document.getElementById("toggleSidebar");
     const pageTitle = document.getElementById("page-title");
     const pageContent = document.getElementById("page-content");
+    const imageRow = document.getElementById("image-row");
     const pageButtons = document.querySelectorAll(".page-btn");
     const sectionButtons = document.querySelectorAll(".section-btn");
+
+    const pageImages = {
+      "Getting Started": [
+        ["☁️", "Sky Island", "Your main home in the sky."],
+        ["🗝️", "Portal Key", "Crafted with a daily recipe."],
+        ["🌀", "Shifting Portal", "Changes destination and rules."]
+      ],
+      "Island Rules": [
+        ["🏝️", "Main Island", "Build, farm, trade, and survive."],
+        ["🏠", "Player Bases", "Create homes and group areas."],
+        ["⚖️", "Limited Space", "Every block matters."]
+      ],
+      "Keep Inventory Grace Period": [
+        ["🛡️", "Grace Period", "Safe start for 1 or 2 days."],
+        ["🎒", "Keep Inventory", "No early punishment."],
+        ["⏳", "Preparation Time", "Get ready before danger rises."]
+      ],
+      "Player Progression": [
+        ["📈", "Progress", "Grow through tasks and survival."],
+        ["🛠️", "Roles", "Builder, trader, fighter, explorer."],
+        ["👑", "Reputation", "Become known on the server."]
+      ],
+      "Portal Overview": [
+        ["🌀", "Portal", "The main mystery of Skybound."],
+        ["🌍", "Other Worlds", "Travel beyond the island."],
+        ["⚠️", "Risk", "Every trip has danger."]
+      ],
+      "Portal Keys": [
+        ["🗝️", "Portal Key", "Required to enter the portal."],
+        ["🧪", "Daily Recipe", "The crafting recipe changes."],
+        ["🤝", "Trading", "Players may need to cooperate."]
+      ],
+      "Overworld Trips": [
+        ["🌲", "Overworld", "Gather rare resources."],
+        ["⛏️", "Resource Run", "Collect what the island lacks."],
+        ["🚪", "One-Time World", "The same area may not return."]
+      ],
+      "Shifting Portal Rules": [
+        ["🌀", "Shifting Portal", "Destination changes daily."],
+        ["📦", "Item Rules", "Some days you can bring loot back."],
+        ["🔥", "Nether Access", "Nether only through the portal."]
+      ],
+      "Death & Recovery": [
+        ["💀", "Death Risk", "Loot may be lost forever."],
+        ["🚫", "Temporary Ban", "Some deaths may lock you out."],
+        ["❤️", "Recovery", "Others may need to save you."]
+      ],
+      "Social Experiments": [
+        ["🎭", "Trust Tests", "Loyalty or betrayal?"],
+        ["🕵️", "Secrets", "Players may make hidden deals."],
+        ["⚔️", "Conflict", "Choices create stories."]
+      ],
+      "Mini Games": [
+        ["🎮", "Mini Games", "Challenges through the portal."],
+        ["🏁", "Races", "Compete for rewards."],
+        ["⚔️", "PvP", "Fight for victory."]
+      ],
+      "Wishes & Rewards": [
+        ["⭐", "Wishes", "Special rewards for winners."],
+        ["💎", "Rare Items", "Earn powerful prizes."],
+        ["⚖️", "Balance", "Strong, but not server-breaking."]
+      ],
+      "Season Timeline": [
+        ["📅", "Season Start", "Begins with a grace period."],
+        ["🌀", "Portal Era", "Portal rules become central."],
+        ["🏆", "Endgame", "Groups, rivalries, and winners."]
+      ]
+    };
 
     const pages = {
       "Getting Started": `
@@ -538,6 +646,17 @@
       <p>This page has not been written yet.</p>
     `;
 
+    const updateImages = (title) => {
+      const images = pageImages[title] || pageImages["Getting Started"];
+      imageRow.innerHTML = images.map(item => `
+        <div class="wiki-image-card">
+          <div class="wiki-icon">${item[0]}</div>
+          <strong>${item[1]}</strong>
+          <span>${item[2]}</span>
+        </div>
+      `).join("");
+    };
+
     toggleSidebar.addEventListener("click", () => {
       sidebar.classList.toggle("hidden");
       toggleSidebar.textContent = sidebar.classList.contains("hidden") ? "☰" : "✕";
@@ -557,6 +676,7 @@
         const title = button.dataset.title;
         pageTitle.textContent = title;
         pageContent.innerHTML = placeholderText(title);
+        updateImages(title);
       });
     });
   </script>
